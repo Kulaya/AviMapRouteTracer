@@ -1,4 +1,5 @@
 streamlit
 folium
 streamlit_folium
+folium.plugins
 geocoder
