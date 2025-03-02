@@ -37,7 +37,7 @@ get_location = """
 # Display geolocation button
 st.components.v1.html(get_location, height=50)
 
-# Initialize session state variables
+# Initialize session state variables if not already set
 if "tracking" not in st.session_state:
     st.session_state.tracking = False
 if "source" not in st.session_state:
@@ -45,14 +45,14 @@ if "source" not in st.session_state:
 if "destination" not in st.session_state:
     st.session_state.destination = ""
 
-# Get detected location from user input
-source_coords = st.text_input("Source Coordinates (Auto-detected)", value=st.session_state.source, key="source")
-destination_coords = st.text_input("Destination Coordinates (Auto-filled on stop)", value=st.session_state.destination, key="destination")
+# Display input fields with session state values
+source_coords = st.text_input("Source Coordinates (Auto-detected)", value=st.session_state.source, key="source_input")
+destination_coords = st.text_input("Destination Coordinates (Auto-filled on stop)", value=st.session_state.destination, key="destination_input")
 
 # Buttons to control tracking
 if st.button("Start Tracking"):
     st.session_state.tracking = True
-    st.session_state.source = source_coords
+    st.session_state.source = source_coords  # Store the source when tracking starts
     st.success("Tracking started...")
 
 if st.button("Stop Tracking"):
