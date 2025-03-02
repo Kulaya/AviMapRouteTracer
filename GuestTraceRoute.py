@@ -1,7 +1,7 @@
 import streamlit as st
 import folium
 from streamlit_folium import folium_static
-from folium.plugins import PolyLine
+from folium.vector_layers import PolyLine
 import geocoder
 import json
 import os
