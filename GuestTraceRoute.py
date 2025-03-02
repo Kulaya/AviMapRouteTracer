@@ -1,6 +1,5 @@
 import streamlit as st
 import folium
-from streamlit_folium import folium_static
 from folium.vector_layers import PolyLine
 import requests
 
@@ -59,13 +58,5 @@ if st.button("Stop Tracking"):
         st.session_state.destination = source_coords  # Set destination as last tracked point
         st.success("Tracking stopped!")
         google_maps_link = generate_google_maps_link(st.session_state.source, st.session_state.destination)
-        st.markdown(f"[Open in Google Maps]({google_maps_link})")
-
-if st.button("Show Direction"):
-    if st.session_state.source and st.session_state.destination:
-        m = folium.Map(location=[float(coord) for coord in st.session_state.source.split(",")], zoom_start=14)
-        folium.Marker([float(coord) for coord in st.session_state.source.split(",")], popup="Start (A)", icon=folium.Icon(color="green")).add_to(m)
-        folium.Marker([float(coord) for coord in st.session_state.destination.split(",")], popup="Destination (B)", icon=folium.Icon(color="red")).add_to(m)
-        folium_static(m)
-    else:
-        st.error("No route available!")
+        st.write("Copy and paste the link below into Google Maps to view your travel path:")
+        st.code(google_maps_link)
